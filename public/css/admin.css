@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap");
+
+        :root {
+            --primary-color: #5d5fef;
+            --primary-color-dark: #4b4dbf;
+            --secondary-color: #131516;
+            --text-light: #767268;
+            --text-dark: #333333;
+            --extra-light: #f8f8f8;
+            --white: #ffffff;
+            --max-width: 1200px;
+
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        .nav_bar {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .nav_logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+
+
+        .nav_btns {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        a {
+            text-decoration: none; 
+            color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.75em 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn_primary {
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+            background-color: var(--primary-color);
+        }
+
+        .btn_secondary {
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+            background-color: var(--primary-color);
+        }
+
+        .btn_primary:hover {
+            background-color: var(--primary-color-dark);
+            border-color: var(--primary-color-dark);
+        }
+
+        .btn_secondary:hover {
+            background-color: var(--primary-color-dark);
+            border-color: var(--primary-color-dark);
+        }
+
+
+        /* ya dekhi table ko css suru xa */
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        .table {
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-delete{
+            background-color: red;
+            border: red;
+        
+        }
+
+        .property-edit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .property-delete {
+            background-color: red;
+            color: var(--white);
+            border: none;
+            padding: 5px 5px;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+        }
+        
+       
+
+        /* Modal overlay */
+.modal {
+    display: none; /* Hidden by default, shown with JS */
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content box */
+.modal-content {
+    background: #fff;
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(60,60,100,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.close {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close:hover { color: #333; }
+
+#projectForm label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--primary-color);
+}
+
+#projectForm input[type=\"text\"],
+#projectForm input[type=\"date\"],
+#projectForm textarea {
+    width: 100%;
+    padding: 0.7em 1em;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #f8f8f8;
+    transition: border 0.2s;
+}
+#projectForm input[type=\"text\"]:focus,
+#projectForm input[type=\"date\"]:focus,
+#projectForm textarea:focus {
+    border: 1.5px solid var(--primary-color);
+    outline: none;
+}
+
+#projectForm input[type=\"file\"] {
+    margin-bottom: 1rem;
+}
+
+#projectForm button[type=\"submit\"] {
+    width: 100%;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}

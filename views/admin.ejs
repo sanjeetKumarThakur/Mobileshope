@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav_bar">
+
+            <div class="nav_logo">Repair Cloud</div>
+            <div class="nav_btns">
+                <a class="btn btn_primary" id="home" href="/">Home</a>
+                <a class="btn btn_secondary" id="openProjectModal" href="javascript:void(0);">Post project</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project Number</th>
+                        <th>Image</th>
+                        <th>Project description</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="projectTableBody">
+                    <% if (typeof projects !=='undefined' && projects.length> 0) { %>
+                        <% projects
+                            .slice()
+                            .sort((a, b) => (a.projectNumber > b.projectNumber ? 1 : -1))
+                            .forEach(function(p) { %>
+                            <tr data-id="<%= p._id %>">
+                                <td><%= p.projectNumber %></td>
+                                <td>
+                                    <% if (p.imageUrl) { %>
+                                        <img src="<%= p.imageUrl %>" alt="img"
+                                            style="width:60px;height:60px;object-fit:cover;">
+                                    <% } %>
+                                </td>
+                                <td><%= p.description %></td>
+                                <td><%= p.date ? p.date.toISOString().slice(0,10) : '' %></td>
+                                <td>
+                                    <button class="edit-btn btn btn_secondary" data-id="<%= p._id %>">Edit</button>
+                                    <button class="delete-btn btn btn_primary" data-id="<%= p._id %>">Delete</button>
+                                    <% if (!p.completed) { %>
+                                        <button class="complete-btn btn btn_success" data-id="<%= p._id %>">Completed</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5">No projects found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Project Modal Form -->
+    <div id="projectModal"
+        style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:2rem; border-radius:8px; max-width:400px; margin:auto; position:relative;">
+            <span id="closeProjectModal"
+                style="position:absolute; top:10px; right:20px; font-size:2rem; cursor:pointer;">&times;</span>
+            <h2>Post Project</h2>
+            <form action="/projects" id="projectForm" method="POST" enctype="multipart/form-data">
+                <label for="projectNumber">Project Number</label>
+                <input type="text" id="projectNumber" name="projectNumber" required>
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3" required></textarea>
+                <label for="date">Last Date</label>
+                <input type="date" id="date" name="date" required>
+                <button type="submit" class="btn btn_primary" style="margin-top:1rem;">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="editProjectModal"
+        style="display:none; position:fixed; z-index:1001; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:2rem; border-radius:8px; max-width:400px; margin:auto; position:relative;">
+            <span id="closeEditProjectModal"
+                style="position:absolute; top:10px; right:20px; font-size:2rem; cursor:pointer;">&times;</span>
+            <h2>Edit Project</h2>
+            <form id="editProjectForm" enctype="multipart/form-data">
+                <input type="hidden" id="editProjectId" name="id">
+                <label for="editProjectNumber">Project Number</label>
+                <input type="text" id="editProjectNumber" name="projectNumber" required>
+                <label for="editImage">Image (leave blank to keep current)</label>
+                <input type="file" id="editImage" name="image" accept="image/*">
+                <label for="editDescription">Description</label>
+                <textarea id="editDescription" name="description" rows="3" required></textarea>
+                <label for="editDate">Last Date</label>
+                <input type="date" id="editDate" name="date" required>
+                <button type="submit" class="btn btn_primary" style="margin-top:1rem;">Update</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+
+</body>
+
+</html>
